@@ -1,0 +1,20 @@
+library(plyr)
+library(zip)
+library(dplyr)
+library(readr)
+library(tidyverse)
+
+zipF<- "E:/Transfer/EPC Data/all-domestic-certificates.zip"
+outDir<-"E:/Transfer/EPC Data/allDomestic_ouput"
+unzip(zipF,exdir=outDir)
+#test <- read.csv("Desktop/EPC Data/Bury postcodes.csv")
+
+setwd("Desktop/EPC Data/")
+
+epc_MergedCert_GM <-
+  do.call(rbind,
+          lapply(list.files(pattern="certificates.csv", recursive = T), read.csv))
+
+epc_MergedRecom_GM <-
+  do.call(rbind,
+          lapply(list.files(pattern="recommendations.csv", recursive = T), read.csv))
